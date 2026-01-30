@@ -1,0 +1,19 @@
+
+# Terraform
+
+.terraform/
+
+crash.log
+
+crash.*.log
+
+.terraform.lock.hcl
+
+
+
+# Sensitive variables and keys
+
+*.save
+
+*.backup
+
