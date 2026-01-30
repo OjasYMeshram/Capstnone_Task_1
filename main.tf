@@ -237,7 +237,7 @@ resource "aws_instance" "web" {
 
   cat > /var/www/html/index.html <<'HTML'
 
-  <h1>Hello from Terraform Capstone1 EC2 (Amazon Linux 2023)!</h1>
+  <h1>Hello from Terraform Capstone1 EC2</h1>
 
    HTML
 
