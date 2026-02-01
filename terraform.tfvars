@@ -1,4 +1,4 @@
-aws_region = "eu-north-1"
+aws_region = "ap-east-1"
 
 vpc_cidr = "10.0.0.0/16"
 
@@ -13,3 +13,4 @@ http_ingress_cidrs = ["0.0.0.0/0"]
 ssh_ingress_cidrs = ["0.0.0.0/0"]
 
 key_name = "mykey"
+
