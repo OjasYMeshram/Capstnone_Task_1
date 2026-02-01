@@ -37,9 +37,9 @@ variable "ssh_ingress_cidrs" {
 
 resource "aws_vpc" "main_vpc" {
 
-  cidr_block           = var.vpc_cidr
+  cidr_block = var.vpc_cidr
 
-  enable_dns_support   = true
+  enable_dns_support = true
 
   enable_dns_hostnames = true
 
@@ -59,9 +59,9 @@ resource "aws_vpc" "main_vpc" {
 
 resource "aws_subnet" "public_subnet" {
 
-  vpc_id                  = aws_vpc.main_vpc.id
+  vpc_id = aws_vpc.main_vpc.id
 
-  cidr_block              = var.public_subnet_cidr
+  cidr_block = var.public_subnet_cidr
 
   map_public_ip_on_launch = true
 
@@ -127,7 +127,7 @@ resource "aws_route_table" "public_rt" {
 
 resource "aws_route_table_association" "rt_assoc" {
 
-  subnet_id      = aws_subnet.public_subnet.id
+  subnet_id = aws_subnet.public_subnet.id
 
   route_table_id = aws_route_table.public_rt.id
 
@@ -138,11 +138,11 @@ resource "aws_route_table_association" "rt_assoc" {
 
 resource "aws_security_group" "web_sg" {
 
-  name        = "web-sg"
+  name = "web-sg"
 
   description = "Allow HTTP & SSH"
 
-  vpc_id      = aws_vpc.main_vpc.id
+  vpc_id = aws_vpc.main_vpc.id
 
 
 
@@ -150,11 +150,11 @@ resource "aws_security_group" "web_sg" {
 
   ingress {
 
-    from_port   = 80
+    from_port = 80
 
-    to_port     = 80
+    to_port = 80
 
-    protocol    = "tcp"
+    protocol = "tcp"
 
     cidr_blocks = var.http_ingress_cidrs
 
@@ -166,11 +166,11 @@ resource "aws_security_group" "web_sg" {
 
   ingress {
 
-    from_port   = 22
+    from_port = 22
 
-    to_port     = 22
+    to_port = 22
 
-    protocol    = "tcp"
+    protocol = "tcp"
 
     cidr_blocks = var.ssh_ingress_cidrs
 
@@ -182,11 +182,11 @@ resource "aws_security_group" "web_sg" {
 
   egress {
 
-    from_port   = 0
+    from_port = 0
 
-    to_port     = 0
+    to_port = 0
 
-    protocol    = "-1"
+    protocol = "-1"
 
     cidr_blocks = ["0.0.0.0/0"]
 
@@ -208,17 +208,17 @@ resource "aws_security_group" "web_sg" {
 
 resource "aws_instance" "web" {
 
-  ami                         = var.ami_id
+  ami = var.ami_id
 
-  instance_type               = var.instance_type
+  instance_type = var.instance_type
 
-  subnet_id                   = aws_subnet.public_subnet.id
+  subnet_id = aws_subnet.public_subnet.id
 
   associate_public_ip_address = true
 
-  vpc_security_group_ids      = [aws_security_group.web_sg.id]
+  vpc_security_group_ids = [aws_security_group.web_sg.id]
 
-  key_name                    = var.key_name
+  key_name = var.key_name
 
   user_data = <<-EOF
 
